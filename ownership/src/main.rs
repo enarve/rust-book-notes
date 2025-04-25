@@ -22,15 +22,15 @@ fn main() {
     }
 }
 
-fn example_1() {
+fn _example_1() {
     let x = 5;
     let y = x;
     println!("x = {}, y = {}", x, y);
 }
 
-fn example_2() {
+fn _example_2() {
     let s1 = String::from("hello");
-    let s2 = s1;
+    let s2 = s1.clone();
     println!("s1 = {}, s2 = {}", s1, s2);
 
     // what is the difference between len and capacity
@@ -46,4 +46,18 @@ fn example_2() {
     // it could work as a value type, when memory is copied
 
     // instead it does something else
+
+    // s1 is moved to s2
+
+    let s3 = String::from("invalidation");
+}
+
+fn _example_3() {
+    let mut s = String::from("hello");
+    s = String::from("ahoy");
+
+    println!("{s}, world!");
+
+    // something on scope and assignment
+    
 }
