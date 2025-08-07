@@ -2,6 +2,7 @@ fn main() {
     let days = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"];
     let rl1 = "On the";
     let rl2 = "day of Christmas\nMy true love sent to me";
+    let rl3 = " and";
 
     let days_lines = ["A partridge in a pear tree",
     "Two turtle-doves",
@@ -19,8 +20,12 @@ fn main() {
 
     for i in 0..days.len() {
         println!("{} {} {}", rl1, days[i], rl2);
-        for j in (0..i).rev() {
-            println!("{}", days_lines[j]);
+        for j in (0..i+1).rev() {
+            print!("{}", days_lines[j]);
+            if i > 0 && j == 1 {
+                print!("{rl3}");
+            }
+            println!();
         }
         println!();
     }
