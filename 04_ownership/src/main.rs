@@ -22,7 +22,8 @@ fn main() {
     }
 
     // _example_4();
-    _example_5();
+    // _example_5();
+    _example_8();
 }
 
 fn _example_1() {
@@ -60,9 +61,6 @@ fn _example_3() {
     s = String::from("ahoy");
 
     println!("{s}, world!");
-
-    // something on scope and assignment
-
 }
 
 fn _example_4() {
@@ -126,4 +124,16 @@ fn takes_and_gives_back(a_string: String) -> String {
     a_string
 }
 
-// References...
+fn _example_8() {
+    let s1 = String::from("hello");
+
+    let (s2, len) = calculate_length(s1);
+
+    println!("The length of '{s2}' is {len}.");
+}
+
+fn calculate_length(s: String) -> (String, usize) {
+    let length = s.len();
+
+    (s, length)
+}
