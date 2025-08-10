@@ -4,11 +4,11 @@
 
 fn main() {
     
-    let mut s = String::from("literal");
-    s.push_str(", bar.");
+    let mut s = String::from("hello");
+    s.push_str(", world.");
     println!("{s}");
 
-    // <- can be mutaded, stored in heap, probably
+    // <- can be mutaded, stored in heap
 
     // string literal -> contents known in compile time
 
