@@ -13,6 +13,8 @@ use std::collections::HashMap;
 fn main() {
     let mut hm: HashMap<String, String> = HashMap::new();
 
+    println!("Available commands:\n1. Add Name to Department\n2. Get all\n3. Get from Department\n4. quit\n");
+
     loop {
     
         let reader = std::io::stdin();
@@ -43,7 +45,7 @@ fn main() {
                 if words.len() == 4 {
                     let name = words[1].trim();
                     let department = words[3].trim();
-                    println!("Adding {name} employee to {department}...");
+                    println!("Added {name} employee to {department}!");
                     hm.insert(String::from(name), String::from(department));
                 }
             } else if command == get_command {
@@ -51,8 +53,12 @@ fn main() {
                     let subcommand = words[1].trim();
                     if subcommand == all_subcommand {
                         // print all
-                        println!("printing all");
+                        let mut data = vec![];
                         for (k, v) in &hm {
+                            data.push((k, v));
+                        }
+                        data.sort();
+                        for (k, v) in data {
                             println!("{} {}", k, v);
                         }
                     }
@@ -61,11 +67,15 @@ fn main() {
                     let dep = words[2].trim();
                     if subcommand == from_subcommand {
                         // print some
-                        println!("printing some");
+                        let mut data = vec![];
                         for (k, v) in &hm {
                             if v == dep {
-                            println!("{}", k);
+                            data.push(k);
                             }
+                        }
+                        data.sort();
+                        for k in data {
+                            println!("{}", k);
                         }
                     }
                 }
