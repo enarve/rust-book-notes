@@ -1,3 +1,6 @@
+use std::time::Duration;
+use std::thread;
+
 #[derive(Debug, PartialEq, Copy, Clone)]
 enum ShirtColor {
     Red,
@@ -47,4 +50,46 @@ fn main() {
     let user_pref2 = None;
     let giveaway2 = store.giveaway(user_pref2);
     println!("The user with preference {:?} gets {:?}", user_pref2, giveaway2);
+
+    let expensive_closure = |num: u32| -> u32 {
+        println!("calculating slowly...");
+        thread::sleep(Duration::from_secs(2));
+        num
+    };
+
+    fn add_one_v1(x: u32) -> u32 { x+ 1 }
+    let add_one_v2 = |x: u32| -> u32 { x + 1 };
+    // let add_one_v3 = |x| { x + 1 };
+    // let add_one_v4 = |x| x + 1;
+
+    let example_closure = |x| x;
+
+    let s = example_closure(String::from("hello"));
+    // let n = example_closure(5);
+
+    example()
+}
+
+fn example() {
+    let mut list = vec![1, 2, 3];
+    println!("Before defining closure: {:?}", list);
+
+    // let only_borrows = || println!("From closure: {:?}", list);
+    let mut borrows_mutably = || list.push(7);
+
+    // println!("Before calling closure: {:?}", list);
+    // only_borrows();
+    borrows_mutably();
+    println!("After calling the closure: {:?}", list);
+}
+
+fn example_2() {
+    let mut list = vec![1, 2, 3];
+    println!("Before defining closure: {:?}", list);
+    
+    // force taking ownership of list
+    thread::spawn(move || {
+        println!("From thread: {:?}", list)
+    }).join().unwrap();
+
 }
