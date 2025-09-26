@@ -67,7 +67,8 @@ fn main() {
     let s = example_closure(String::from("hello"));
     // let n = example_closure(5);
 
-    example()
+    // example()
+    example_3();
 }
 
 fn example() {
@@ -93,3 +94,51 @@ fn example_2() {
     }).join().unwrap();
 
 }
+
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+// Moving captured values out of closures and fn traits
+fn example_3() {
+    // Traits to be implemented by closures
+    // FnOnce
+    // FnMut
+    // Fn
+
+    let mut list = [
+        Rectangle { width: 10, height: 1 },
+        Rectangle { width: 3, height: 5 },
+        Rectangle { width: 7, height: 12 },
+    ];
+    
+    // list.sort_by_key(|r| r.width);
+    // println!("{:#?}", list);
+
+    // let mut sort_operations = vec![];
+    let mut num_sort_operations = 0;
+    // let value = String::from("by key called");
+
+    list.sort_by_key(|r| {
+        // sort_operations.push(value);
+        num_sort_operations += 1;
+        r.width
+    });
+    println!(
+        "{:#?}, sorted in {num_sort_operations} operations",
+        list
+    );
+}
+
+// unwrap_or_else implementation
+// impl<T> Option<T> {
+//     pub fn unwrap_or_else<F>(self, f: F) -> T
+//     where F: FnOnce() -> T {
+//         match self {
+//             Some(x) => x,
+//             None => f(),
+//         }
+//     }
+// }
