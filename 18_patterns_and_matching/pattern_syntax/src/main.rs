@@ -199,4 +199,20 @@ fn main() {
         4 | 5 | 6 if y => println!("yes"),
         _ => println!("no"),
     }
+
+    enum LittleMessage {
+        Hello { id: i32 },
+    }
+
+    let msg = LittleMessage::Hello { id: 5 };
+
+    match msg {
+        LittleMessage::Hello {
+            id: id_variable @ 3..=7,
+        } => println!("Found an id in range: {id_variable}"),
+        LittleMessage::Hello { id: 10..=12 } => {
+            println!("Found an id in another range")
+        }
+        LittleMessage::Hello { id } => println!("Some other id: {id}"),
+    }
 }
